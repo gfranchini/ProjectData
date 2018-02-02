@@ -1,0 +1,13 @@
+@import "bootstrap";
+
+.nav-links a {
+  color: white;
+}
+
+.alert-alert {
+  @extend .alert-danger;
+}
+
+.alert-notice {
+  @extend .alert-success;
+}
