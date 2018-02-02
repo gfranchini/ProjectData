@@ -10,7 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_02_02_063138) do
+ActiveRecord::Schema.define(version: 2018_02_02_065427) do
+
+  create_table "environments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name"
+    t.boolean "docker"
+    t.boolean "rancher"
+    t.string "url"
+    t.text "notes"
+    t.string "dbhost"
+    t.string "dbuser"
+    t.string "dbname"
+    t.string "dbport"
+    t.bigint "project_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_environments_on_project_id"
+  end
 
   create_table "projects", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -19,4 +35,5 @@ ActiveRecord::Schema.define(version: 2018_02_02_063138) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "environments", "projects"
 end

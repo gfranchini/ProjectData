@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Environments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Docker</th>
+      <th>Rancher</th>
+      <th>Url</th>
+      <th>Notes</th>
+      <th>Dbhost</th>
+      <th>Dbuser</th>
+      <th>Dbname</th>
+      <th>Dbport</th>
+      <th>Project</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @environments.each do |environment| %>
+      <tr>
+        <td><%= environment.name %></td>
+        <td><%= environment.docker %></td>
+        <td><%= environment.rancher %></td>
+        <td><%= environment.url %></td>
+        <td><%= environment.notes %></td>
+        <td><%= environment.dbhost %></td>
+        <td><%= environment.dbuser %></td>
+        <td><%= environment.dbname %></td>
+        <td><%= environment.dbport %></td>
+        <td><%= environment.project %></td>
+        <td><%= link_to 'Show', environment %></td>
+        <td><%= link_to 'Edit', edit_environment_path(environment) %></td>
+        <td><%= link_to 'Destroy', environment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Environment', new_environment_path %>

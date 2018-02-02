@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @environment.name %>
+</p>
+
+<p>
+  <strong>Docker:</strong>
+  <%= @environment.docker %>
+</p>
+
+<p>
+  <strong>Rancher:</strong>
+  <%= @environment.rancher %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @environment.url %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @environment.notes %>
+</p>
+
+<p>
+  <strong>Dbhost:</strong>
+  <%= @environment.dbhost %>
+</p>
+
+<p>
+  <strong>Dbuser:</strong>
+  <%= @environment.dbuser %>
+</p>
+
+<p>
+  <strong>Dbname:</strong>
+  <%= @environment.dbname %>
+</p>
+
+<p>
+  <strong>Dbport:</strong>
+  <%= @environment.dbport %>
+</p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @environment.project %>
+</p>
+
+<%= link_to 'Edit', edit_environment_path(@environment) %> |
+<%= link_to 'Back', environments_path %>

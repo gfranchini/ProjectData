@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  docker: false
+  rancher: false
+  url: MyString
+  notes: MyText
+  dbhost: MyString
+  dbuser: MyString
+  dbname: MyString
+  dbport: MyString
+  project: one
+
+two:
+  name: MyString
+  docker: false
+  rancher: false
+  url: MyString
+  notes: MyText
+  dbhost: MyString
+  dbuser: MyString
+  dbname: MyString
+  dbport: MyString
+  project: two
