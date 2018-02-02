@@ -78,15 +78,17 @@
 
 <h2>Architecture Diagram</h2>
 
-<div class="text-center">
-  <%# if @environment.architecture.exists? %>
-    <%#= image_tag @environment.architecture.url(:medium) %>
+<% if @environment.architecture.attached? %>
+  <p>
+    <strong>Image:</strong>
     <br>
-    <%#= link_to "Click here for larger view.", @environment.architecture.url %>
-  <%# else %>
+    <%= image_tag @environment.architecture.variant(resize: "900x900") %>
+  </p>
+<% else %>
+  <p>
     No architecture uploaded. Upload one now!
-  <%# end %>
-</div>
+  </p>
+<% end %>
 
 <hr>
 

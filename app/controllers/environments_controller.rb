@@ -16,7 +16,7 @@ class EnvironmentsController < ApplicationController
       end
 
     else
-      redirect_to projects_path, danger: "This environment does not exist."
+      redirect_to projects_path, danger: "That environment does not exist."
     end
   end
 

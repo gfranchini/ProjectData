@@ -105,22 +105,26 @@
 
   <!-- End deployment notes -->
 
-  <!-- Upload architecture via PaperClip -->
+  <!-- Active Storage upload -->
+  <hr>
 
-    <!-- <div class="text-center">
-      <%# if @environment.architecture.exists? %>
-        <%#= image_tag @environment.architecture.url(:medium) %>
-        <br>
-        <%#= link_to "Click here for larger view.", @environment.architecture.url %>
-      <%# else %>
-        No architecture uploaded. Upload one now!
-      <%# end %>
-    </div>
+  <% if @environment.architecture.attached? %>
+    <p>
+      <strong>Image:</strong>
+      <br>
+      <%= image_tag @environment.architecture %>
+    </p>
+  <% else %>
+    <p>
+      No architecture uploaded. Upload one now!
+    </p>
+  <% end %>
 
-    <div class="form-group">
-      <%#= form.file_field :architecture %>
-    </div> -->
-    <!-- End Upload architecture via PaperClip -->
+  <div class="field">
+    <%= form.label :architecture %>
+    <%= form.file_field :architecture %>
+  </div>
+  <!-- End Active Storage upload -->
 
 
   <div class="actions">

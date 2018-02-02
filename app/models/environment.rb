@@ -1,5 +1,6 @@
 class Environment < ApplicationRecord
   belongs_to :project
+  has_one_attached :architecture
   has_many :servers, dependent: :destroy
   accepts_nested_attributes_for :servers, reject_if: proc { |attributes| attributes['ip'].blank? }, allow_destroy: true
 
