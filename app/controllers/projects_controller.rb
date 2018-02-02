@@ -1,15 +1,22 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    if params[:search]
+      @projects = Project.search(params[:search])
+    else
+      @projects = Project.all
+    end
   end
 
   # GET /projects/1
   # GET /projects/1.json
   def show
+    @project = Project.find(params[:id])
+    @environments = Project.find(params[:id]).environments
   end
 
   # GET /projects/new
@@ -56,7 +63,7 @@ class ProjectsController < ApplicationController
   def destroy
     @project.destroy
     respond_to do |format|
-      format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
+      format.html { redirect_to projects_url, notice: 'Project was successfully deleted.' }
       format.json { head :no_content }
     end
   end

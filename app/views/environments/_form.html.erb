@@ -1,67 +1,129 @@
-<%= form_with(model: environment, local: true) do |form| %>
-  <% if environment.errors.any? %>
+<%= form_with(model: @environment, local: true, html: { multipart: true }) do |form| %>
+  <% if @environment.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(environment.errors.count, "error") %> prohibited this environment from being saved:</h2>
+      <h2><%= pluralize(@environment.errors.count, "error") %> prohibited this project from being saved:</h2>
 
       <ul>
-      <% environment.errors.full_messages.each do |message| %>
+      <% @environment.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <% if @environment.name == nil%>
+  <div class="form-group">
+      <%= form.label :name %>
+      <%= form.select :name, Environment.env_validator(@environments), {}, class: 'form-control' %>
+  </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.hidden_field :project_id, value: @project_id %>
   </div>
 
-  <div class="field">
-    <%= form.label :docker %>
-    <%= form.check_box :docker %>
+<!-- Section for radio buttons -->
+  <div>
+    <p>
+      Dockerized?: <%= form.check_box :docker%>
+    </p>
+    <p>
+      Rancherized?: <%= form.check_box :rancher%>
+    </p>
+  </div>
+<!-- End Section for radio buttons -->
+
+<!-- Section for domain -->
+<div class="form-group">
+  <%= form.label "Domain for project" %>
+  <%= form.text_field :url, id: :url, class: "form-control" %>
+</div>
+<!-- End section for domain -->
+
+<!-- Begin Servers form -->
+  <div>
+      <h2>Add Servers </h2>
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th class="text-center">Hostname</th>
+            <th class="text-center">IP</th>
+            <th class="text-center">OS</th>
+            <th class="text-center">CPU</th>
+            <th class="text-center">Memory</th>
+            <th class="text-center">Storage</th>
+            <th class="text-center">Location</th>
+          </tr>
+        </thead>
+        <tbody>
+        <%= form.fields_for(:servers) do |server| %>
+          <%= render 'server_fields', f: server %>
+        <% end %>
+        </tbody>
+      </table>
+      <div>
+        <%= link_to_add_association('Add Server', form, :servers, class: "btn btn-primary") %>
+      </div>
   </div>
 
-  <div class="field">
-    <%= form.label :rancher %>
-    <%= form.check_box :rancher %>
+  <hr>
+  <!-- End Servers form -->
+
+  <!-- Begin Database configs -->
+
+  <h2>Database Information</h2>
+  <div class="form-group">
+    <%= form.label "Database host" %>
+    <%= form.text_field :dbhost, id: :dbhost, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :url %>
-    <%= form.text_field :url %>
+  <div class="form-group">
+    <%= form.label "Database port" %>
+    <%= form.text_field :dbport, id: :dbport, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :notes %>
-    <%= form.text_area :notes %>
+  <div class="form-group">
+    <%= form.label "Database user" %>
+    <%= form.text_field :dbuser, id: :dbuser, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :dbhost %>
-    <%= form.text_field :dbhost %>
+  <div class="form-group">
+    <%= form.label "Database name" %>
+    <%= form.text_field :dbname, id: :dbname, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :dbuser %>
-    <%= form.text_field :dbuser %>
+  <hr>
+
+  <!-- End database configs -->
+
+  <!-- Begin deployment notes -->
+  <h2>Deployment Notes</h2>
+  <div class="form-group">
+
+    <%= form.text_area :notes, id: :notes, class: "form-control" %>
   </div>
 
-  <div class="field">
-    <%= form.label :dbname %>
-    <%= form.text_field :dbname %>
-  </div>
+  <!-- End deployment notes -->
 
-  <div class="field">
-    <%= form.label :dbport %>
-    <%= form.text_field :dbport %>
-  </div>
+  <!-- Upload architecture via PaperClip -->
 
-  <div class="field">
-    <%= form.label :project_id %>
-    <%= form.text_field :project_id %>
-  </div>
+    <!-- <div class="text-center">
+      <%# if @environment.architecture.exists? %>
+        <%#= image_tag @environment.architecture.url(:medium) %>
+        <br>
+        <%#= link_to "Click here for larger view.", @environment.architecture.url %>
+      <%# else %>
+        No architecture uploaded. Upload one now!
+      <%# end %>
+    </div>
+
+    <div class="form-group">
+      <%#= form.file_field :architecture %>
+    </div> -->
+    <!-- End Upload architecture via PaperClip -->
+
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Save Environment", class: "btn btn-success" %>
   </div>
 <% end %>

@@ -1,6 +1,7 @@
-<h1>Editing Environment</h1>
+<center><h1>Editing environment for <%= @project %> (<%= @environment.name %>) </h1></center>
 
 <%= render 'form', environment: @environment %>
 
-<%= link_to 'Show', @environment %> |
-<%= link_to 'Back', environments_path %>
+
+<%= link_to 'Show', projects_path %> |
+<%= link_to 'Back', projects_path %>

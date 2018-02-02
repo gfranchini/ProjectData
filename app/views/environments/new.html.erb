@@ -1,5 +1,5 @@
-<h1>New Environment</h1>
+<h1>Adding a new environment for: <strong><%= @project %></strong></h1>
 
-<%= render 'form', environment: @environment %>
+<%= render 'form', environments: @environment %>
 
-<%= link_to 'Back', environments_path %>
+<%= link_to 'Back', project_path(@project_id) %>

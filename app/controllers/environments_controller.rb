@@ -1,52 +1,61 @@
 class EnvironmentsController < ApplicationController
-  before_action :set_environment, only: [:show, :edit, :update, :destroy]
 
-  # GET /environments
-  # GET /environments.json
   def index
-    @environments = Environment.all
+    @environments = Project.find(params[:project_id]).environments
   end
 
-  # GET /environments/1
-  # GET /environments/1.json
   def show
+    if Environment.find_by(id: params[:id])
+      @environment = Environment.find(params[:id])
+      @servers = Environment.find(params[:id]).servers
+      @project_id = params[:project_id]
+      @project = Project.find(params[:project_id])
+
+      if !@project.environments.find_by(id: @environment.id)
+        redirect_to project_path(@project_id), danger: "That environment does not exist for this project."
+      end
+
+    else
+      redirect_to projects_path, danger: "This environment does not exist."
+    end
   end
 
-  # GET /environments/new
   def new
-    @environment = Environment.new
+    @environment = Environment.new()
+    @project = Project.find(params[:project_id]).name
+    @project_id = params[:project_id]
+    @environments = Project.find(params[:project_id]).environments
+    @@project_id = params[:project_id]
   end
 
-  # GET /environments/1/edit
   def edit
+    @environment = Environment.find(params[:id])
+    @project = Project.find(params[:project_id]).name
+    @project_id = params[:project_id]
+    @servers = Environment.find(params[:id]).servers
+    @environments = Project.find(params[:project_id]).environments
   end
 
-  # POST /environments
-  # POST /environments.json
   def create
     @environment = Environment.new(environment_params)
 
     respond_to do |format|
       if @environment.save
-        format.html { redirect_to @environment, notice: 'Environment was successfully created.' }
-        format.json { render :show, status: :created, location: @environment }
+        format.html { redirect_to project_path(@environment.project_id), notice: 'Environment was added to project.' }
       else
         format.html { render :new }
-        format.json { render json: @environment.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /environments/1
-  # PATCH/PUT /environments/1.json
   def update
+    @environment = Environment.find(params[:id])
+
     respond_to do |format|
       if @environment.update(environment_params)
-        format.html { redirect_to @environment, notice: 'Environment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @environment }
+        format.html { redirect_to project_environment_path(@environment.project_id), notice: 'Environment was successfully updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @environment.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -54,21 +63,21 @@ class EnvironmentsController < ApplicationController
   # DELETE /environments/1
   # DELETE /environments/1.json
   def destroy
+    @environment = Environment.find(params[:id])
     @environment.destroy
+
+    @project = Project.find(params[:id])
     respond_to do |format|
-      format.html { redirect_to environments_url, notice: 'Environment was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to project_path(@environment.project_id), notice: 'Environment was successfully deleted.' }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_environment
-      @environment = Environment.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def environment_params
-      params.require(:environment).permit(:name, :docker, :rancher, :url, :notes, :dbhost, :dbuser, :dbname, :dbport, :project_id)
+      params.require(:environment).permit(:name, :project_id, :docker, :rancher, :architecture, :url, :dbname, :dbhost, :dbuser,:dbport, :notes,
+      servers_attributes: [:id, :hostname, :ip, :cpu, :memory, :storage, :location, :notes, :operating_system, :environment_id, :_destroy],
+      load_balacers_attributes: [:ip, :brand, :applicability, :environment_id, :_destroy]
+      )
     end
 end

@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hostname: MyString
+  ip: MyString
+  cpu: 1
+  memory: 1
+  storage: 1
+  location: MyString
+  notes: MyText
+  operating_system: MyString
+  environment: one
+
+two:
+  hostname: MyString
+  ip: MyString
+  cpu: 1
+  memory: 1
+  storage: 1
+  location: MyString
+  notes: MyText
+  operating_system: MyString
+  environment: two

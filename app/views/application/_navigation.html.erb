@@ -1,0 +1,16 @@
+<!-- Nav Bar -->
+<nav class="navbar navbar-inverse bg-primary sticky-top" >
+  <div class="container">
+    <a class="navbar-brand" style="color: white;" href="/">AppData</a>
+  </div>
+
+  <div class="nav-links">
+    <% if current_user %>
+      <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+    <% else %>
+      <%= link_to "Register", new_user_registration_path %>
+      <%= link_to "Login", new_user_session_path %>
+    <% end %>
+  </div>
+</nav>
+<!-- End Nav Bar -->

@@ -1,0 +1,14 @@
+<table>
+  <tbody>
+    <tr class="form-group nested-fields">
+      <td><%= f.text_field :hostname, class: "form-control" %></td>
+      <td><%= f.text_field :ip, class: "form-control" %></td>
+      <td><%= f.select(:operating_system, ["Ubuntu 16.04", "Ubuntu 14.04", "CentOS 6", "CentOS 7"],{}, {class: "form-control"}) %></td>
+      <td><%= f.number_field :cpu, class: "form-control" %></td>
+      <td><%= f.number_field :memory, class: "form-control" %></th>
+      <td><%= f.number_field :storage, class: "form-control" %></td>
+      <td><%= f.select(:location, ["GHW", "COLO", "AWS"], {}, {class: "form-control"}) %></td>
+      <td><%= link_to_remove_association 'x', f, class: "btn btn-danger" %></td>
+    </tr>
+  </tbody>
+</table>
