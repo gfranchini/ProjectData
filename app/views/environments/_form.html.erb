@@ -112,7 +112,7 @@
     <p>
       <strong>Image:</strong>
       <br>
-      <%= image_tag @environment.architecture %>
+      <%= image_tag @environment.architecture.variant(resize: "900x900") %>
     </p>
   <% else %>
     <p>

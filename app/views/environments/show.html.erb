@@ -1,6 +1,22 @@
 <p id="notice"><%= notice %></p>
 
-<h2>Information for <strong><%= @project.name %> : <%= @environment.name %></strong></h2>
+<div class="text-center">
+  <h2><strong><%= @project.name %> : <%= @environment.name %></strong></h2>
+</div>
+
+<hr>
+
+  <h2>Environment Information</h2>
+  <div>
+    <br><strong>Domain name:</strong> <%= link_to "#{@environment.url}", @environment.url, target: :_blank %>
+    <br><strong>Dockerized?</strong> <%= @environment.docker %>
+    <br><strong>On Rancher?</strong> <%= @environment.rancher %>
+  </div>
+
+<hr>
+
+<h2>Server Information</h2>
+<% if @environment.servers.count != 0 %>
 <div class="panel panel-default">
   <!-- /.panel-heading -->
   <div class="panel-body">
@@ -36,14 +52,11 @@
   </div>
   <!-- /.panel-body -->
 </div>
-<hr>
-
-  <h2>Environment Information</h2>
-  <div>
-    <br><strong>Domain name:</strong> <%= link_to "#{@environment.url}", @environment.url, target: :_blank %>
-    <br><strong>Dockerized?</strong> <%= @environment.docker %>
-    <br><strong>On Rancher?</strong> <%= @environment.rancher %>
+<% else %>
+  <div class="text-center">
+    <strong>No server information saved yet.</strong>
   </div>
+<% end %>
 
 <hr>
 
@@ -80,9 +93,10 @@
 
 <% if @environment.architecture.attached? %>
   <p>
-    <strong>Image:</strong>
     <br>
-    <%= image_tag @environment.architecture.variant(resize: "900x900") %>
+    <div class='text-center'>
+        <a href="<%= url_for(@environment.architecture) %>"><%= image_tag @environment.architecture.variant(resize: "900x900") %></a>
+    </div>
   </p>
 <% else %>
   <p>
@@ -91,11 +105,12 @@
 <% end %>
 
 <hr>
+<div class="row">
+  <div class="float-left">
+    <%= link_to 'Edit this environment', edit_project_environment_path, class: "btn btn-primary" %>
+  </div>
 
-<p>
-  <%= link_to 'Edit this environment', edit_project_environment_path, class: "btn btn-primary" %>
-</p>
-
-<p>
-  <%= link_to 'Back To Projects', projects_path %>
-</p>
+  <div class="float-right">
+    <%= link_to 'Back To Projects', projects_path, class: "btn btn-primary" %>
+  </div>
+</div>

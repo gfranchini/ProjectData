@@ -4,6 +4,6 @@ class Project < ApplicationRecord
   validates :name, presence: true
 
   def self.search(search)
-    where('name ILIKE ?', '%' + "#{search}" + '%')
+    where('name LIKE ?', '%' + "#{search}" + '%')
   end
 end
