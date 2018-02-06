@@ -53,6 +53,7 @@ class EnvironmentsController < ApplicationController
 
     respond_to do |format|
       if @environment.update(environment_params)
+        purge_image(@environment) if params[:environment][:purge_image] == "1"
         format.html { redirect_to project_environment_path(@environment.project_id), notice: 'Environment was successfully updated.' }
       else
         format.html { render :edit }
@@ -60,8 +61,6 @@ class EnvironmentsController < ApplicationController
     end
   end
 
-  # DELETE /environments/1
-  # DELETE /environments/1.json
   def destroy
     @environment = Environment.find(params[:id])
     @environment.destroy
@@ -75,9 +74,10 @@ class EnvironmentsController < ApplicationController
   private
 
     def environment_params
-      params.require(:environment).permit(:name, :project_id, :docker, :rancher, :architecture, :url, :dbname, :dbhost, :dbuser,:dbport, :notes,
-      servers_attributes: [:id, :hostname, :ip, :cpu, :memory, :storage, :location, :notes, :operating_system, :environment_id, :_destroy],
-      load_balacers_attributes: [:ip, :brand, :applicability, :environment_id, :_destroy]
-      )
+      params.require(:environment).permit(:name, :project_id, :docker, :rancher, :architecture, :url, :dbname, :dbhost, :dbuser, :dbport, :notes, :purge_image)
+    end
+
+    def purge_image(environment)
+      environment.architecture.purge
     end
 end

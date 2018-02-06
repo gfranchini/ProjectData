@@ -107,12 +107,16 @@
 
   <!-- Active Storage upload -->
   <hr>
-
+  <h2>Architecture Diagram</h2>
   <% if @environment.architecture.attached? %>
     <p>
-      <strong>Image:</strong>
       <br>
-      <%= image_tag @environment.architecture.variant(resize: "900x900") %>
+      <div class="text-center">
+        <%= image_tag @environment.architecture.variant(resize: "900x900") %>
+      </div>
+      <div>
+        Delete Image? <%= form.check_box(:purge_image) %>
+      </div>
     </p>
   <% else %>
     <p>
