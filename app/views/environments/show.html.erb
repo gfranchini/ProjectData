@@ -24,10 +24,10 @@
                   <tr>
                       <th>HostName</th>
                       <th>IP</th>
+                      <th>Operating System</th>
                       <th>CPU</th>
                       <th>Memory</th>
-                      <th>Storage</th>
-                      <th>Operating System</th>
+                      <th>Storage (GB)</th>
                       <th>Location</th>
                   </tr>
               </thead>
@@ -36,10 +36,10 @@
                   <tr>
                     <td><%= server.hostname %></td>
                     <td><%= server.ip %></td>
+                    <td><%= server.operating_system %></td>
                     <td><%= server.cpu %></td>
                     <td><%= server.memory %></td>
                     <td><%= server.storage %></td>
-                    <td><%= server.operating_system %></td>
                     <td><%= server.location %></td>
                   </tr>
                   <% end %>

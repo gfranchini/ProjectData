@@ -56,7 +56,7 @@ class EnvironmentsController < ApplicationController
         purge_image(@environment) if params[:environment][:purge_image] == "1"
         format.html { redirect_to project_environment_path(@environment.project_id), notice: 'Environment was successfully updated.' }
       else
-        format.html { render :edit }
+        format.html { redirect_to project_environment_path(@environment.project_id) }
       end
     end
   end
@@ -74,7 +74,8 @@ class EnvironmentsController < ApplicationController
   private
 
     def environment_params
-      params.require(:environment).permit(:name, :project_id, :docker, :rancher, :architecture, :url, :dbname, :dbhost, :dbuser, :dbport, :notes, :purge_image)
+      params.require(:environment).permit(:name, :project_id, :docker, :rancher, :architecture, :url, :dbname, :dbhost, :dbuser, :dbport, :notes, :purge_image,
+        servers_attributes: [:id, :hostname, :ip, :cpu, :memory, :storage, :location, :notes, :operating_system, :environment_id, :_destroy])
     end
 
     def purge_image(environment)
