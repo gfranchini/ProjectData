@@ -1,5 +1,5 @@
 projects = {
-  "OmegaXL": "Omega 3 site with Larry King",
+  "OmegaXL" => "Omega 3 site with Larry King",
   "GreatHealthWorks": "The GHW store.",
   "Towzing Site": "Towzing wordpress landing page.",
   "Chat": "Internal chat tool for IBOs.",
