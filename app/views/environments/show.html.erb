@@ -3,10 +3,9 @@
 </div>
 
 <hr>
-
   <h2>Environment Information</h2>
   <div>
-    <br><strong>Domain name:</strong> <%= link_to "#{@environment.url}", @environment.url, target: :_blank %>
+    <br><strong>Domain name:</strong> <%= "#{@environment.url}" %>
     <br><strong>Dockerized?</strong> <%= @environment.docker %>
     <br><strong>On Rancher?</strong> <%= @environment.rancher %>
   </div>
