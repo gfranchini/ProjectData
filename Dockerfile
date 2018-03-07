@@ -8,9 +8,9 @@ RUN apt-get update -qq && apt-get install -y --no-install-recommends\
   postgresql \
   postgresql-contrib
 
-RUN mkdir /app
+RUN mkdir /ProjectData
 
-WORKDIR /app
+WORKDIR /ProjectData
 
 COPY Gemfile Gemfile.lock ./
 

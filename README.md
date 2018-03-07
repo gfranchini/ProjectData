@@ -1,24 +1,10 @@
-# README
+# Project Data
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This app is just for me to keep track of all of the servers I maintain.
 
-Things you may want to cover:
+### To deploy locally
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```bash
+$ docker-compose up
+$ docker-compose run project_data rails db:setup
+```
