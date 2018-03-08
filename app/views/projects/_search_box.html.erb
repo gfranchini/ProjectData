@@ -1,6 +1,8 @@
 <%= form_tag(projects_path, :method => "get", id: "search-form") do %>
   <%= text_field_tag :search, params[:search], placeholder: "Search Projects" %>
-  <%= submit_tag "Search", :name => nil %>
+  <%= button_tag type: "submit", class: "btn btn-primary" do %>
+    <i class="fa fa-search"></i>
+  <% end %>
 <% end %>
 
 <% if projects.blank? %>

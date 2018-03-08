@@ -11,14 +11,26 @@
             <%= link_to "Projects", projects_path, class: "nav-link js-scroll-trigger" %>
           </li>
           <li class="nav-item">
-            <%= link_to "About", "#pages/about", class: "nav-link js-scroll-trigger" %>
+            <%= link_to "About", "pages/about", class: "nav-link js-scroll-trigger" %>
           </li>
           <li class="nav-item">
             <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link js-scroll-trigger" %>
           </li>
+          <li class="nav-item">
+          <form class="form-inline my-2 my-lg-0 mr-lg-2">
+            <div class="input-group">
+              <%= text_field_tag :search, params[:search], class: "form-control", placeholder: "Search projects..." %>
+              <span class="input-group-append">
+                <%= button_tag type: "submit", class: "btn btn-primary" do %>
+                  <i class="fa fa-search"></i>
+                <% end %>
+              </span>
+            </div>
+          </form>
+        </li>
         <% else %>
           <li class="nav-item">
-            <%= link_to "About", "#pages/about", class: "nav-link js-scroll-trigger" %>
+            <%= link_to "About", "/pages/about", class: "nav-link js-scroll-trigger" %>
           </li>
           <li class="nav-item">
             <%= link_to "Register", new_user_registration_path, class: "nav-link js-scroll-trigger" %>
