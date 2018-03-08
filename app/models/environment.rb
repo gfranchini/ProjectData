@@ -10,7 +10,7 @@ class Environment < ApplicationRecord
     collector = []
 
     project_envs.map(&:attributes).each do |x|
-       collector.push(x['name'])
+      collector.push(x['name'])
     end
 
     return collector - environments | environments - collector

@@ -3,50 +3,44 @@
     <h1>Environments for: <strong><%= @project.name %></strong></h1>
 
   <!-- Card -->
-  <div class="row">
-    <% @environments.each do |x| %>
+    <% if @environments.count == 0 %>
+    <header class="jumbotron my-4">
+        <h1 class="display-3">Oh No!<i class="fa fa-battery-empty"></i></h1>
+        <p class="lead">No environments have been setup for this project. Add one now.</p>
+        <%= link_to('Add environment', new_project_environment_path(@project), class: 'btn btn-primary') %>
+    </header>
+    <% else %>
+    <div class="row">
+    <% @environments.each do |environment_attribute| %>
       <div class="col-lg-4 col-md-6 mb-4">
         <div class="card h-100">
-          <!-- <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a> -->
           <%= image_tag("code.jpg", class: "card-img-top") %>
           <div class="card-body">
             <h4 class="card-title">
-              <%= link_to("#{x.name}", project_environment_path(@project, x.id))  %>
+              <%= link_to("#{environment_attribute.name}", project_environment_path(@project, environment_attribute.id))  %>
             </h4>
             <p class="card-text"><%= @project.description %></p>
           </div>
           <div class="card-footer">
             <!-- <small class="text-muted">★ ★ ★ ★ ☆</small> -->
             <div class="text-center">
-              <% if x.docker %>
-                On Docker |
-              <% else %>
-                Not on Docker |
-              <% end %>
-
-              <% if x.rancher %>
-                On Rancher
-              <% else %>
-                Not on Rancher
-              <% end %>
+              <%= docker_attribute_helper(environment_attribute)%>
+              <%= rancher_attribute_helper(environment_attribute)%>
             </div>
             <hr>
-            <td><%= link_to 'Edit', edit_project_environment_path(@project, x.id), class: "btn btn-block btn-info" %></td>
-            <td><%= link_to 'Delete', project_environment_path(@project, x.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-block btn-danger" %></td>
+            <td><%= link_to 'Edit', edit_project_environment_path(@project, environment_attribute.id), class: "btn btn-block btn-info" %></td>
+            <td><%= link_to 'Delete', project_environment_path(@project, environment_attribute.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-block btn-danger" %></td>
           </div>
         </div>
       </div>
     <% end %>
-  </div>
-
-  <div class="row">
-    <div class="col-lg-12 col-md-12 col-xs-12">
-    	  <%= link_to('Add an environment to this project', new_project_environment_path(@project), class: 'btn btn-primary') %>
     </div>
-  </div>
-
-  <%= link_to 'Edit', edit_project_path(@project) %> |
-  <%= link_to 'Back to projects', projects_path %>
-
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-xs-12 text-center">
+          <%= link_to 'Add an environment', new_project_environment_path(@project) %> |
+          <%= link_to 'Back to projects', projects_path %>
+      </div>
+    </div>
+    <% end %>
   </div>
 </div>
