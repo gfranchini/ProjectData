@@ -1,9 +1,5 @@
 @import "bootstrap";
 
-.nav-links a {
-  color: white;
-}
-
 .alert-alert {
   @extend .alert-danger;
 }
@@ -14,4 +10,8 @@
 
 .devise-pages {
   margin-top: 7em;
+}
+
+body {
+    padding-top: 60px;
 }
