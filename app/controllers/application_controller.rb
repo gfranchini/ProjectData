@@ -3,8 +3,8 @@ class ApplicationController < ActionController::Base
   add_flash_types :danger, :info, :warning, :success
 
   private
-  
+
   def after_sign_out_path_for(current_user)
-    pages_goodbye_path
+    root_path
   end
 end

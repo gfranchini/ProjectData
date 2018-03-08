@@ -7,7 +7,7 @@
   <div class="nav-links">
     <% if current_user %>
       <%= link_to "About", "pages/about"%> |
-      <%= link_to "Logout", destroy_user_session_path, method: :delete %>
+      <%= link_to "Logout", destroy_user_session_path , method: :delete %>
     <% else %>
       <%= link_to "About" %> |
       <%= link_to "Register", new_user_registration_path %> |

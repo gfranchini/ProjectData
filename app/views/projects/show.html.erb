@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="col-lg-10 col-md-8">
+  <div class="col-lg-10 col-md-8 text-center">
     <h1>Environments for: <strong><%= @project.name %></strong></h1>
 
   <!-- Card -->
@@ -30,7 +30,8 @@
               <% end %>
             </div>
             <hr>
-            <td><%= link_to 'Delete', project_environment_path(@project, x.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger float-right" %></td>
+            <td><%= link_to 'Edit', edit_project_environment_path(@project, x.id), class: "btn btn-block btn-info" %></td>
+            <td><%= link_to 'Delete', project_environment_path(@project, x.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-block btn-danger" %></td>
           </div>
         </div>
       </div>
