@@ -1,10 +1,10 @@
-<%= form_tag(projects_path, :method => "get", id: "search-form") do %>
-  <%= text_field_tag :search, params[:search], placeholder: "Search Projects" %>
-  <%= button_tag type: "submit", class: "btn btn-primary" do %>
+<div class="input-group">
+  <%= form_tag(projects_path, :method => "get", id: "search-form") do %>
+  <span class="input-group-append">
+    <%= text_field_tag :search, params[:search], placeholder: "Search Projects" %>
+    <%= button_tag name: nil, type: "submit", class: "btn btn-primary" do %>
     <i class="fa fa-search"></i>
+    <% end %>
+  </span>
   <% end %>
-<% end %>
-
-<% if projects.blank? %>
-  No results found
-<% end %>
+</div>

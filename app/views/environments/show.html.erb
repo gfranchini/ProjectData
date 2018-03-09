@@ -102,7 +102,7 @@
           <center>No notes saved to DB.</center>
         </p>
       <% else %>
-        <%= @environment.notes %>
+        <%= markdown(@environment.notes) %>
       <% end %>
     </div>
   <hr>
