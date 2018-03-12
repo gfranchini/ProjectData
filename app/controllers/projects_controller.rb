@@ -8,16 +8,22 @@ class ProjectsController < ApplicationController
     else
       @projects = Project.order(updated_at: :desc)
     end
+
+    #Instantiates an object only if user is logged in.
+    if current_user
+      @new_project = Project.new
+      puts "A new object was created."
+    end
+  end
+
+  def new
+    @project = Project.new
   end
 
 
   def show
     @project = Project.find(params[:id])
     @environments = Project.find(params[:id]).environments
-  end
-
-  def new
-    @project = Project.new
   end
 
   def edit
